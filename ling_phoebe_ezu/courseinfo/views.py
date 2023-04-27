@@ -34,20 +34,20 @@ class InstructorDetail(DetailView, LoginRequiredMixin, PermissionRequiredMixin):
         return context
 
 
-class InstructorCreate(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class InstructorCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = InstructorForm
     model = Instructor
     permission_required = 'courseinfo.add_instructor'
 
 
-class InstructorUpdate(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class InstructorUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = InstructorForm
     model = Instructor
     template_name = 'courseinfo/instructor_form_update.html'
     permission_required = 'courseinfo.change_instructor'
 
 
-class InstructorDelete(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class InstructorDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Instructor
     success_url = reverse_lazy('courseinfo_instructor_list_urlpattern')
     permission_required = 'courseinfo.delete_instructor'
@@ -94,20 +94,20 @@ class SectionDetail(DetailView, LoginRequiredMixin, PermissionRequiredMixin):
         return context
 
 
-class SectionCreate(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class SectionCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = SectionForm
     model = Section
     permission_required = 'courseinfo.add_section'
 
 
-class SectionUpdate(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class SectionUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = SectionForm
     model = Section
     template_name = 'courseinfo/section_form_update.html'
     permission_required = 'courseinfo.change_section'
 
 
-class SectionDelete(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class SectionDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Section
     success_url = reverse_lazy('courseinfo_section_list_urlpattern')
     permission_required = 'courseinfo.delete_section'
@@ -148,20 +148,20 @@ class CourseDetail(DetailView, LoginRequiredMixin, PermissionRequiredMixin):
         return context
 
 
-class CourseCreate(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class CourseCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = CourseForm
     model = Course
     permission_required = 'courseinfo.add_course'
 
 
-class CourseUpdate(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class CourseUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = CourseForm
     model = Course
     template_name = 'courseinfo/course_form_update.html'
     permission_required = 'courseinfo.change_course'
 
 
-class CourseDelete(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class CourseDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Course
     success_url = reverse_lazy('courseinfo_course_list_urlpattern')
     permission_required = 'courseinfo.delete_course'
@@ -203,20 +203,20 @@ class SemesterDetail(DetailView, LoginRequiredMixin, PermissionRequiredMixin):
         return context
 
 
-class SemesterCreate(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class SemesterCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = SemesterForm
     model = Semester
     permission_required = 'courseinfo.add_semester'
 
 
-class SemesterUpdate(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class SemesterUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = SemesterForm
     model = Semester
     template_name = 'courseinfo/semester_form_update.html'
     permission_required = 'courseinfo.change_semester'
 
 
-class SemesterDelete(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class SemesterDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Semester
     success_url = reverse_lazy('courseinfo_semester_list_urlpattern')
     permission_required = 'courseinfo.delete_semester'
@@ -259,20 +259,20 @@ class StudentDetail(DetailView, LoginRequiredMixin, PermissionRequiredMixin):
         return context
 
 
-class StudentCreate(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class StudentCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = StudentForm
     model = Student
     permission_required = 'courseinfo.add_student'
 
 
-class StudentUpdate(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class StudentUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = StudentForm
     model = Student
     template_name = 'courseinfo/student_form_update.html'
     permission_required = 'courseinfo.change_student'
 
 
-class StudentDelete(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class StudentDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Student
     success_url = reverse_lazy('courseinfo_student_list_urlpattern')
     permission_required = 'courseinfo.delete_student'
@@ -316,20 +316,20 @@ class RegistrationDetail(DetailView, LoginRequiredMixin, PermissionRequiredMixin
         return context
 
 
-class RegistrationCreate(CreateView, LoginRequiredMixin, PermissionRequiredMixin):
+class RegistrationCreate(LoginRequiredMixin, PermissionRequiredMixin, CreateView):
     form_class = RegistrationForm
     model = Registration
     permission_required = 'courseinfo.add_registration'
 
 
-class RegistrationUpdate(UpdateView, LoginRequiredMixin, PermissionRequiredMixin):
+class RegistrationUpdate(LoginRequiredMixin, PermissionRequiredMixin, UpdateView):
     form_class = RegistrationForm
     model = Registration
     template_name = 'courseinfo/registration_form_update.html'
     permission_required = 'courseinfo.change_registration'
 
 
-class RegistrationDelete(DeleteView, LoginRequiredMixin, PermissionRequiredMixin):
+class RegistrationDelete(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Registration
     success_url = reverse_lazy('courseinfo_registration_list_urlpattern')
     permission_required = 'courseinfo.delete_registration'
