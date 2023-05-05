@@ -248,6 +248,7 @@ class Event(models.Model):
     event_name = models.CharField(max_length=45)
     disambiguator = models.CharField(max_length=45, blank=True, default='')
     style = models.ForeignKey(Style, related_name='event', on_delete=models.PROTECT, blank=True, null=True)
+    category = models.ForeignKey(EventCategory, related_name='event', on_delete=models.PROTECT, blank=True, null=True)
 
     def __str__(self):
         result = ''

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block create_button %}
-    {% if perms.fandom.add_student %}
+    {% if perms.fandom.add_album %}
       <a href="{% url 'fandom_album_create_urlpattern' %}"
          class="button button-primary">
         Create New Album</a>
@@ -14,7 +14,7 @@
 
 {% block org_content %}
   <h2>Album List</h2>
-    {% if perms.fandom.add_student %}
+    {% if perms.fandom.add_album %}
     <div class="mobile">
       <a href="{% url 'fandom_album_create_urlpattern' %}"
          class="button button-primary">

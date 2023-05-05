@@ -1,6 +1,7 @@
 from django.contrib import admin
 
-from .models import Company, Group, Style, Entertainer, EntertainerGroup, Album, Song, Role, Create, EventCategory, Event, Activity
+from .models import Company, Group, Style, Entertainer, EntertainerGroup, Album, Song, Role, Create, EventCategory, \
+    Event, Activity
 
 admin.site.register(Company)
 admin.site.register(Group)

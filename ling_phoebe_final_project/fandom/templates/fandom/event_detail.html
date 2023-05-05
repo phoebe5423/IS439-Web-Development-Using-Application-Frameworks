@@ -46,6 +46,12 @@
                     <td>{{ event.style }}</td>
                 </tr>
             {% endif %}
+            {% if event.category %}
+                <tr>
+                    <th>Category:</th>
+                    <td>{{ event.category }}</td>
+                </tr>
+            {% endif %}
         </table>
     </section>
 
