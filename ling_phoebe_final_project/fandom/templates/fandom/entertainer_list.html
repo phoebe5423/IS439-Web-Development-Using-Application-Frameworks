@@ -1,0 +1,37 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Entertainer List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.fandom.add_entertainer %}
+        <a href="{% url 'fandom_entertainer_create_urlpattern' %}"
+                class="button button-primary">
+            Create New Entertainer</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+    <h2>Entertainer List</h2>
+    {% if perms.fandom.add_entertainer %}
+        <div class="mobile">
+            <a href="{% url 'fandom_entertainer_create_urlpattern' %}"
+                    class="button button-primary">
+                Create New Entertainer</a>
+        </div>
+    {% endif %}
+    <ul>
+        {% for entertainer in entertainer_list %}
+            <li>
+                <a href="{{ entertainer.get_absolute_url }}">
+                    {{ entertainer }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no entertainers available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
+
+

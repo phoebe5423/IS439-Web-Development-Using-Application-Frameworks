@@ -1,0 +1,21 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Delete Entertainer
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ entertainer.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            entertainer {{ entertainer }}?
+        </p>
+        <a href="{{ entertainer.get_absolute_url }}"
+           class="button button-primary">
+        Cancel</a>
+        <button type="submit" class="button button-primary">Delete Entertainer</button>
+    </form>
+{% endblock %}

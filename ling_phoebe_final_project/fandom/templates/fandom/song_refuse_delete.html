@@ -1,0 +1,25 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Error Deleting Song
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Song</h2>
+        <p>
+            You may not delete song {{ song }}.
+            This song currently has the following contributors:
+        </p>
+
+        <ul>
+            {% for create in creates %}
+            <li><a href="{{ create.get_absolute_url }}">{{ create }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'fandom_song_list_urlpattern' %}">Songs List</a>.
+        </p>
+    </div>
+{% endblock %}

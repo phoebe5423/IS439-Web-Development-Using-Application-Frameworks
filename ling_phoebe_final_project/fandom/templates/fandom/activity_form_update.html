@@ -1,0 +1,15 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Update Activity
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ activity.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Activity</button>
+    </form>
+{% endblock %}

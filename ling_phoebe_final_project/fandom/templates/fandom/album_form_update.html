@@ -1,0 +1,15 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Update Album
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ album.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Album</button>
+    </form>
+{% endblock %}

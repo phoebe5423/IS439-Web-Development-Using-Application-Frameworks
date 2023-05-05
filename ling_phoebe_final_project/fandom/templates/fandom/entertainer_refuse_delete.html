@@ -1,0 +1,41 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Error Deleting Entertainer
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Entertainer</h2>
+        <p>
+            You may not delete entertainer {{ entertainer }}.  This
+            entertainer currently belongs to the following
+            groups:
+        </p>
+
+        <ul>
+            {% for ent_group in entertainer_groups %}
+            <li><a href="{{ ent_group.group.get_absolute_url }}">{{ ent_group.group }}</a></li>
+            {%  endfor %}
+        </ul>
+        <p>
+            Or has the following works:
+        </p>
+        <ul>
+            {% for song in create %}
+            <li><a href="{{ song.get_absolute_url }}">{{ song }}</a></li>
+            {%  endfor %}
+        </ul>
+        <p>
+            Or has joined the following events:
+        </p>
+        <ul>
+            {% for act in activity %}
+            <li><a href="{{ act.get_absolute_url }}">{{ act }}</a></li>
+            {%  endfor %}
+        </ul>
+        <p>
+            Return to <a href="{% url 'fandom_entertainer_list_urlpattern' %}">Entertainer List</a>.
+        </p>
+    </div>
+{% endblock %}

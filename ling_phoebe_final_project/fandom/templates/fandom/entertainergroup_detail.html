@@ -1,0 +1,55 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Entertainer's Group - {{ entertainer_group }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ entertainer_group }}</h2>
+                <ul class="inline">
+                    {% if perms.fandom.change_entertainer_group %}
+                        <li>
+                            <a href="{{ entertainer_group.get_update_url }}"
+                               class="button button-primary">
+                                Edit</a></li>
+                    {% endif %}
+                    {% if perms.fandom.delete_entertainer %}
+                        <li>
+                            <a href="{{ entertainer_group.get_delete_url }}"
+                               class="button button-primary">
+                                Delete </a></li>
+                    {% endif %}
+                </ul>
+                <h3><a href="{{ entertainer.get_absolute_url }}">
+                    {{ entertainer }}</a></h3>
+                <section>
+                    <table>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ entertainer.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{ entertainer.last_name }}</td>
+                        </tr>
+                        {% if entertainer.disambiguator %}
+                        <tr>
+                            <th>Disambiguator:</th>
+                            <td>{{ entertainer.disambiguator }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Group:</th>
+                            <td><a href="{{ group.get_absolute_url }}">{{ group }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

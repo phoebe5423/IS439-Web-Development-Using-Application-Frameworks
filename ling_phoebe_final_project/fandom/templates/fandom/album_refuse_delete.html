@@ -1,0 +1,24 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Error Deleting Album
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Album</h2>
+        <p>
+            You may not delete album {{ album }}.  This
+            album currently has the following songs:
+        </p>
+
+        <ul>
+            {% for song in songs %}
+            <li><a href="{{ song.get_absolute_url }}">{{ song }}</a></li>
+            {%  endfor %}
+        </ul>
+        <p>
+            Return to <a href="{% url 'fandom_album_list_urlpattern' %}"> Album List</a>.
+        </p>
+    </div>
+{% endblock %}

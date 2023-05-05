@@ -1,0 +1,33 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Album List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.fandom.add_student %}
+      <a href="{% url 'fandom_album_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Album</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Album List</h2>
+    {% if perms.fandom.add_student %}
+    <div class="mobile">
+      <a href="{% url 'fandom_album_create_urlpattern' %}"
+         class="button button-primary">
+        Create New Album</a>
+    </div>
+    {% endif %}
+    <ul>
+        {% for album in album_list %}
+            <li>
+                <a href="{{ album.get_absolute_url }}">{{ album }}</a>
+            </li>
+        {% empty %}
+            <li><em>There are currently no albums available.</em></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

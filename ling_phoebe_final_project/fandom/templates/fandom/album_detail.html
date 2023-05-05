@@ -1,0 +1,73 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Album - {{ album }}
+{% endblock %}
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ album }}</h2>
+                <ul class="inline">
+                    {% if perms.fandom.change_album %}
+                        <li>
+                            <a href="{{ album.get_update_url }}"
+                               class="button button-primary">
+                                Edit Album</a></li>
+                    {% endif %}
+                    {% if perms.fandom.delete_album %}
+                        <li>
+                            <a href="{{ album.get_delete_url }}"
+                               class="button button-primary">
+                                Delete Album</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{ album.album_name }}</td>
+                        </tr>
+
+                        {% if album.disambiguator %}
+                        <tr>
+                            <th>Disambiguator:</th>
+                            <td>{{ album.disambiguator }}</td>
+                        </tr>
+                        {% endif %}
+                        {% if album.style %}
+                        <tr>
+                            <th>Style:</th>
+                            <td><a href="{{ album.style.get_absolute_url }}">{{ album.style }}</a></td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Released:</th>
+                            <td>{{ album.released_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Publisher:</th>
+                            <td>{{ album.publisher }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Songs</h3>
+                    <ul>
+                        {% for song in song_list %}
+                            <li>
+                                <a href="{{ song.get_absolute_url }}">{{ song }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no songs for this album.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

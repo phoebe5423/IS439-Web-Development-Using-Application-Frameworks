@@ -1,0 +1,21 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Style List
+{% endblock %}
+
+
+
+{% block org_content %}
+  <h2>Style List</h2>
+  <ul>
+    {% for style in style_list %}
+      <li>
+        <a href="{{ style.get_absolute_url }}">
+          {{ style }}</a>
+      </li>
+    {% empty %}
+      <li><em>There are currently no styles available.</em></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

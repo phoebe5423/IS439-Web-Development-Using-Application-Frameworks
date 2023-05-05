@@ -1,0 +1,21 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Delete Event
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ event.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            event {{ event }}?
+        </p>
+        <a href="{{ event.get_absolute_url }}"
+            class="button button-primary">
+            Cancel</a>
+        <button type="submit" class="button button-primary">Delete Event</button>
+    </form>
+{% endblock %}

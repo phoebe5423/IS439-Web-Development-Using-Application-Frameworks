@@ -1,0 +1,58 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Group - {{ group }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ group }}</h2>
+    <ul class="inline">
+        {% if perms.fandom.change_group %}
+        <li>
+          <a
+              href="{{ group.get_update_url }}"
+              class="button button-primary">
+            Edit Group</a></li>
+        {% endif %}
+        {% if perms.fandom.delete_group %}
+        <li>
+          <a
+              href="{{ group.get_delete_url }}"
+              class="button button-primary">
+            Delete Group</a></li>
+        {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Group Name:</th>
+                <td>{{ group.group_name }}</td>
+            </tr>
+            <tr>
+                <th>Company:</th>
+                <td>{{ group.company }}</td>
+            </tr>
+        </table>
+    </section>
+
+    <section>
+        <h3>Members</h3>
+        <ul>
+            {% for member in member_list %}
+                <li>
+                    <a href="{{ member.entertainer.get_absolute_url }}">{{ member.entertainer }}
+                        <a href="{{ member.get_update_url }}"> [Edit] </a>
+                        <a href="{{ member.get_delete_url }}">[Delete]</a></a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no members in this group.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}

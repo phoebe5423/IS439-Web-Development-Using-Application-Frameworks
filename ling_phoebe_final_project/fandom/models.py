@@ -21,6 +21,10 @@ class Style(models.Model):
     def __str__(self):
         return '%s' % self.style_name
 
+    def get_absolute_url(self):
+        return reverse('fandom_style_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
     class Meta:
         ordering = ['style_name']
 
@@ -38,6 +42,18 @@ class Group(models.Model):
         else:
             result = '%s (%s)' % (self.group_name, self.disambiguator)
         return result
+
+    def get_absolute_url(self):
+        return reverse('fandom_group_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_group_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_group_delete_urlpattern',
+                       kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['group_name', 'disambiguator']
@@ -62,17 +78,17 @@ class Entertainer(models.Model):
             result = '%s, %s (%s)' % (self.last_name, self.first_name, self.disambiguator)
         return result
 
-    # def get_absolute_url(self):
-    #     return reverse('fandom_entertainer_detail_urlpattern',
-    #                    kwargs={'pk': self.pk})
-    #
-    # def get_update_url(self):
-    #     return reverse('fandom_entertainer_update_urlpattern',
-    #                    kwargs={'pk': self.pk})
-    #
-    # def get_delete_url(self):
-    #     return reverse('fandom_entertainer_delete_urlpattern',
-    #                    kwargs={'pk': self.pk})
+    def get_absolute_url(self):
+        return reverse('fandom_entertainer_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_entertainer_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_entertainer_delete_urlpattern',
+                       kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['last_name', 'first_name', 'birth_date', 'disambiguator']
@@ -89,6 +105,18 @@ class EntertainerGroup(models.Model):
 
     def __str__(self):
         return '%s (%s, %s)' % (self.group.group_name, self.entertainer.last_name, self.entertainer.first_name)
+
+    def get_absolute_url(self):
+        return reverse('fandom_entertainergroup_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_entertainergroup_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_entertainergroup_delete_urlpattern',
+                       kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['entertainer', 'group']
@@ -113,6 +141,18 @@ class Album(models.Model):
             result = '%s (%s)' % (self.album_name, self.disambiguator)
         return result
 
+    def get_absolute_url(self):
+        return reverse('fandom_album_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_album_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_album_delete_urlpattern',
+                       kwargs={'pk': self.pk})
+
     class Meta:
         ordering = ['album_name', 'disambiguator']
         constraints = [
@@ -136,6 +176,18 @@ class Song(models.Model):
         else:
             result = '%s (%s)' % (self.song_name, self.disambiguator)
         return result
+
+    def get_absolute_url(self):
+        return reverse('fandom_song_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_song_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_song_delete_urlpattern',
+                       kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['song_name', 'disambiguator', 'released_date']
@@ -163,6 +215,18 @@ class Create(models.Model):
         return '%s - %s, %s (%s)' % (
             self.song.song_name, self.entertainer.last_name, self.entertainer.first_name, self.role)
 
+    def get_absolute_url(self):
+        return reverse('fandom_create_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_create_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_create_delete_urlpattern',
+                       kwargs={'pk': self.pk})
+
     class Meta:
         ordering = ['song', 'role', 'entertainer']
         constraints = [UniqueConstraint(fields=['song', 'role', 'entertainer'], name='unique_create')]
@@ -170,13 +234,13 @@ class Create(models.Model):
 
 class EventCategory(models.Model):
     event_cat_id = models.AutoField(primary_key=True)
-    event_name = models.CharField(max_length=45, unique=True)
+    event_cat_name = models.CharField(max_length=45, unique=True)
 
     def __str__(self):
-        return '%s' % self.event_name
+        return '%s' % self.event_cat_name
 
     class Meta:
-        ordering = ['event_name']
+        ordering = ['event_cat_name']
 
 
 class Event(models.Model):
@@ -192,6 +256,18 @@ class Event(models.Model):
         else:
             result = '%s (%s)' % (self.event_name, self.disambiguator)
         return result
+
+    def get_absolute_url(self):
+        return reverse('fandom_event_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_event_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_event_delete_urlpattern',
+                       kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['event_name', 'disambiguator']
@@ -209,10 +285,25 @@ class Activity(models.Model):
 
     def __str__(self):
         return '%s %s - %s, %s (%s)' % (self.activity_date, self.event.event_name,
-                                       self.entertainer.last_name, self.entertainer.first_name, self.role)
+                                        self.entertainer.last_name, self.entertainer.first_name, self.role)
+
+    def get_absolute_url(self):
+        return reverse('fandom_activity_detail_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_update_url(self):
+        return reverse('fandom_activity_update_urlpattern',
+                       kwargs={'pk': self.pk})
+
+    def get_delete_url(self):
+        return reverse('fandom_activity_delete_urlpattern',
+                       kwargs={'pk': self.pk})
 
     class Meta:
         ordering = ['event', 'activity_date', 'entertainer']
         constraints = [
             UniqueConstraint(fields=['event', 'activity_date', 'entertainer'], name='unique_activate')
         ]
+
+
+

@@ -1,0 +1,47 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Contribution - {{ create }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ create.song }}</h2>
+                <h2>{{ entertainer }} ({{ create.role }})</h2>
+                <ul class="inline">
+                    {% if perms.fandom.change_create %}
+                        <li>
+                            <a href="{{ create.get_update_url }}"
+                               class="button button-primary">
+                                Edit Contribution</a></li>
+                    {% endif %}
+                    {% if perms.fandom.delete_create %}
+                        <a href="{{ create.get_delete_url }}"
+                           class="button button-primary">
+                            Delete Contribution</a></li>
+                    {% endif %}
+                </ul>
+                <section>
+                    <table>
+                        <tr>
+                            <th>Song:</th>
+                            <td><a href="{{ create.song.get_absolute_url }}">{{ create.song }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Contributor:</th>
+                            <td><a href="{{ create.entertainer.get_absolute_url }}">{{ create.entertainer }}</a></td>
+                        </tr>
+                        <tr>
+                            <th>Role:</th>
+                            <td>{{ create.role }}</td>
+                        </tr>
+                    </table>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

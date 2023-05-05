@@ -1,0 +1,15 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Create Group
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'fandom_group_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Group</button>
+    </form>
+{% endblock %}

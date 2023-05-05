@@ -1,0 +1,54 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Style - {{ style }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ style }}</h2>
+    <br>
+
+    <section>
+        <h4>Albums</h4>
+        <ul>
+            {% for album in album_list %}
+                <li>
+                    <a href="{{ album.get_absolute_url }}">{{ album }}</a>
+                </li>
+            {% empty %}
+                <li><em>Currently, no album belongs to this style.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section>
+        <h4>Songs</h4>
+        <ul>
+            {% for song in song_list %}
+                <li>
+                    <a href="{{ song.get_absolute_url }}">{{ song }}</a>
+                </li>
+            {% empty %}
+                <li><em>Currently, no song belongs to this style.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+    <section>
+        <h4>Events</h4>
+        <ul>
+            {% for event in event_list %}
+                <li>
+                    <a href="{{ event.get_absolute_url }}">{{ event }}</a>
+                </li>
+            {% empty %}
+                <li><em>Currently, no event belongs to this style.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}

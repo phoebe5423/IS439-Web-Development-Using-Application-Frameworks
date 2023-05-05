@@ -1,0 +1,85 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Entertainer - {{ entertainer }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ entertainer }}</h2>
+                <ul class="inline">
+                    {% if perms.fandom.change_entertainer %}
+                        <li>
+                            <a href="{{ entertainer.get_update_url }}"
+                               class="button button-primary">
+                                Edit Entertainer</a></li>
+                    {% endif %}
+                    {% if perms.fandom.delete_entertainer %}
+                        <li>
+                            <a href="{{ entertainer.get_delete_url }}"
+                               class="button button-primary">
+                                Delete Entertainer</a></li>
+                    {% endif %}
+                    {% if perms.fandom.add_entertainer_group %}
+                        <li>
+                            <a href="{% url 'fandom_entertainergroup_create_urlpattern' %}"
+                               class="button button-primary">
+                                Add New Group</a></li>
+                    {% endif %}
+                </ul>
+
+                <section>
+                    <table>
+                        <tr>
+                            <th>First Name:</th>
+                            <td>{{ entertainer.first_name }}</td>
+                        </tr>
+                        <tr>
+                            <th>Last Name:</th>
+                            <td>{{ entertainer.last_name }}</td>
+                        </tr>
+                        {% if entertainer.disambiguator %}
+                        <tr>
+                            <th>Disambiguator:</th>
+                            <td>{{ entertainer.disambiguator }}</td>
+                        </tr>
+                        {% endif %}
+                        <tr>
+                            <th>Born:</th>
+                            <td>{{ entertainer.birth_date }}</td>
+                        </tr>
+                        <tr>
+                            <th>Company:</th>
+                            <td>{{ company }}</td>
+                        </tr>
+                        <tr>
+                            <th>Group:</th>
+                            {% for group in entertainer_group_list %}
+                                <td><a href="{{ group.group.get_absolute_url }}">{{ group.group }} </a>
+                                <br><a href="{{ group.get_update_url }}"> [Edit] </a>
+                                <a href="{{ group.get_delete_url }}">[Delete]</a></td>
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </section>
+
+                <section>
+                    <h3>Songs</h3>
+                    <ul>
+                        {% for create in create_list %}
+                            <li>
+                                <a href="{{ create.song.get_absolute_url }}">{{ create }}</a>
+                            </li>
+                        {% empty %}
+                            <li><em>There are currently no songs for this entertainer.</em></li>
+                        {% endfor %}
+                    </ul>
+                </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

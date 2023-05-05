@@ -1,0 +1,15 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Update Contribution
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ create.get_update_url }}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Update Contribution</button>
+    </form>
+{% endblock %}

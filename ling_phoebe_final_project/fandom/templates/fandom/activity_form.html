@@ -1,0 +1,15 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Create Activity
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{% url 'fandom_activity_create_urlpattern'%}"
+        method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="button button-primary">Create Activity</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Event List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.fandom.add_event %}
+    <a
+        href="{% url 'fandom_event_create_urlpattern'  %}"
+        class="button button-primary">
+      Create New Event</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Event List</h2>
+    {% if perms.fandom.add_event %}
+    <div class="mobile">
+      <a
+          href="{% url 'fandom_event_create_urlpattern' %}"
+          class="button button-primary">
+        Create New Event</a>
+    </div>
+    {% endif %}
+  <ul>
+    {% for event in event_list %}
+      <li>
+        <a href="{{ event.get_absolute_url }}">
+          {{ event }}</a>
+      </li>
+    {% empty %}
+      <li><em>There are currently no events available.</em></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

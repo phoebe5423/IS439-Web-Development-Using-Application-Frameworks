@@ -1,0 +1,25 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Error Deleting Group
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h2>Error Deleting Group</h2>
+        <p>
+            You may not delete group {{ group }}.
+            This group currently has the following members:
+        </p>
+
+        <ul>
+            {% for member in entertainer_groups %}
+            <li><a href="{{ member.entertainer.get_absolute_url }}">{{ member.entertainer }}</a></li>
+            {%  endfor %}
+        </ul>
+
+        <p>
+            Return to <a href="{% url 'fandom_group_list_urlpattern' %}">Group List</a>.
+        </p>
+    </div>
+{% endblock %}

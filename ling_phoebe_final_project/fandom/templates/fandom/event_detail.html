@@ -1,0 +1,68 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Event - {{ event }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ event }}</h2>
+    <ul class="inline">
+        {% if perms.fandom.change_event %}
+        <li>
+          <a href="{{ event.get_update_url }}"
+          class="button button-primary">
+            Edit Event</a></li>
+        {% endif %}
+        {% if perms.fandom.delete_event %}
+          <a href="{{ event.get_delete_url }}"
+          class="button button-primary">
+            Delete Event</a></li>
+        {% endif %}
+                {% if perms.fandom.add_activity %}
+                    <li>
+                        <a href="{% url 'fandom_activity_create_urlpattern' %}"
+                               class="button button-primary">
+                            Add Activity</a></li>
+                {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Name:</th>
+                <td>{{ event.event_name }}</td>
+            </tr>
+            {% if event.disambiguator %}
+                <tr>
+                    <th>Disambiguator:</th>
+                    <td>{{ event.disambiguator }}</td>
+                </tr>
+            {% endif %}
+            {% if event.style %}
+                <tr>
+                    <th>Style:</th>
+                    <td>{{ event.style }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+    <section>
+        <h3>Activities</h3>
+        <ul>
+            {% for activity in activity_list %}
+                <li>
+                    <a href="{{ activity.get_absolute_url }}">{{ activity }}</a>
+                </li>
+            {% empty %}
+                <li><em>This event not currently doesn't have any activity.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}

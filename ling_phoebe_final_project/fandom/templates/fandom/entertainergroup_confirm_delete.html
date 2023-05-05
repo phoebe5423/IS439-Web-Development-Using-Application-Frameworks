@@ -1,0 +1,21 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Delete Entertainer's Group Information
+{% endblock %}
+
+{% block content %}
+    <form
+        action="{{ entertainer_group.get_delete_url }}"
+        method="post">
+        {% csrf_token %}
+        <p>
+            Are you sure that you want to delete
+            entertainer {{ entertainer }}'s group information?
+        </p>
+        <a href="{{ entertainer_group.get_absolute_url }}"
+           class="button button-primary">
+        Cancel</a>
+        <button type="submit" class="button button-primary">Delete Information</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Group List
+{% endblock %}
+
+{% block create_button %}
+    {% if perms.fandom.add_group %}
+    <a
+        href="{% url 'fandom_group_create_urlpattern'  %}"
+        class="button button-primary">
+      Create New Group</a>
+    {% endif %}
+{% endblock %}
+
+{% block org_content %}
+  <h2>Group List</h2>
+    {% if perms.fandom.add_group %}
+    <div class="mobile">
+      <a
+          href="{% url 'fandom_group_create_urlpattern' %}"
+          class="button button-primary">
+        Create New Group</a>
+    </div>
+    {% endif %}
+  <ul>
+    {% for group in group_list %}
+      <li>
+        <a href="{{ group.get_absolute_url }}">
+          {{ group }}</a>
+      </li>
+    {% empty %}
+      <li><em>There are currently no groups available.</em></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

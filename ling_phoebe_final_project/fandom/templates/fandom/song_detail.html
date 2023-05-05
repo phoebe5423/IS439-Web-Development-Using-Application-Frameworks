@@ -1,0 +1,82 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Song - {{ song }}
+{% endblock %}
+
+{% block content %}
+    <article>
+        <div class="row">
+            <div class="offset-by-two eight columns">
+                <h2>{{ song }}</h2>
+                <ul class="inline">
+                    {% if perms.fandom.change_song %}
+                    <li>
+                        <a href="{{ song.get_update_url }}"
+                           class="button button-primary">
+                            Edit Song</a></li>
+                    {% endif %}
+                {% if perms.fandom.delete_song %}
+                    <li>
+                        <a href="{{ song.get_delete_url }}"
+                           class="button button-primary">
+                            Delete Song</a></li>
+                {% endif %}
+                {% if perms.fandom.add_create %}
+                    <li>
+                        <a href="{% url 'fandom_create_create_urlpattern' %}"
+                               class="button button-primary">
+                            Add Contributor</a></li>
+                {% endif %}
+                </ul>
+                <section>
+        <table>
+            <tr>
+                <th>Name:</th>
+                <td>{{ song.song_name }}</td>
+            </tr>
+            {% if album.disambiguator %}
+                <tr>
+                    <th>Disambiguator:</th>
+                    <td>{{ song.disambiguator }}</td>
+                </tr>
+            {% endif %}
+            {% if album.style %}
+                <tr>
+                    <th>Style:</th>
+                    <td><a href="{{ song.style.get_absolute_url }}">{{ song.style }}</a></td>
+                </tr>
+            {% endif %}
+            <tr>
+                <th>Released:</th>
+                <td>{{ song.released_date }}</td>
+            </tr>
+            <tr>
+                <th>Publisher:</th>
+                <td>{{ song.publisher }}</td>
+            </tr>
+            </tr>
+        </table>
+
+    </section>
+
+    <section>
+        <h3>Contributors</h3>
+        <ul>
+            {% for contributor in create_list %}
+                <li>
+                    <a href="{{ contributor.entertainer.get_absolute_url }}">{{ contributor }}</a>
+                    <a href="{{ contributor.get_update_url }}"> [Edit] </a>
+                    <a href="{{ contributor.get_delete_url }}">[Delete]</a>
+                </li>
+            {% empty %}
+                <li><em>There are currently no known contributor for this song.</em></li>
+            {% endfor %}
+        </ul>
+    </section>
+
+            </div>
+        </div> <!-- row -->
+
+    </article>
+{% endblock %}

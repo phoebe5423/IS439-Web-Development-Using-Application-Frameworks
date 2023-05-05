@@ -1,0 +1,55 @@
+{% extends 'fandom/base.html' %}
+
+{% block title %}
+    Activity - {{ activity }}
+{% endblock %}
+
+{% block content %}
+<article>
+  <div class="row">
+  <div class="offset-by-two eight columns">
+    <h2>{{ activity }}</h2>
+    <ul class="inline">
+        {% if perms.fandom.change_activity %}
+        <li>
+          <a href="{{ activity.get_update_url }}"
+          class="button button-primary">
+            Edit Activity</a></li>
+        {% endif %}
+        {% if perms.fandom.delete_activity %}
+          <a href="{{ activity.get_delete_url }}"
+          class="button button-primary">
+            Delete Activity</a></li>
+        {% endif %}
+    </ul>
+    <section>
+        <table>
+            <tr>
+                <th>Event:</th>
+                <td>{{ activity.event }}</td>
+            </tr>
+            <tr>
+                <th>Entertainer:</th>
+                <td>{{ activity.entertainer }}</td>
+            </tr>
+            <tr>
+                <th>Role:</th>
+                <td>{{ activity.role }}</td>
+            </tr>
+            <tr>
+                <th>Date:</th>
+                <td>{{ activity.activity_date }}</td>
+            </tr>
+            {% if activity.style %}
+                <tr>
+                    <th>Style:</th>
+                    <td>{{ activity.style }}</td>
+                </tr>
+            {% endif %}
+        </table>
+    </section>
+
+  </div></div> <!-- row -->
+
+</article>
+{% endblock %}
